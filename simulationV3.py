@@ -62,7 +62,8 @@ def populatiryPoints(numCooperated):
         Find an optimal number for populatiryPoints. Right now its just 200, is there a better number?
         Also can we make this equation more realistic to model the real world?
     '''
-    return 200 / (numCooperated + 1)
+    base_points = 150
+    return base_points / (numCooperated + 1)
 
 def cooperatingUtility(numPlayersDefecting, cooperatingUtility=15, cooperatingScalar=3):
     '''
@@ -77,9 +78,9 @@ def cooperatingUtility(numPlayersDefecting, cooperatingUtility=15, cooperatingSc
     TODO
         Verify that this utility function makes sense based on readMe and code
     '''
-    return cooperatingUtility - (cooperatingScalar * math.log(1 + numPlayersDefecting)) + populatiryPoints(numCooperated)
+    return cooperatingUtility - (cooperatingScalar * math.log(1 + numPlayersDefecting)) + populatiryPoints(numPlayersDefecting)
 
-def cooperatingUtilityMech(numPlayersDefecting, cooperatingUtility=15, cooperatingScalar=3):
+def cooperatingUtilityMech(numPlayersDefecting, cooperatingUtility=20, cooperatingScalar=2):
     '''
 
     :param numPlayersDefecting: number of players defecting
@@ -93,9 +94,9 @@ def cooperatingUtilityMech(numPlayersDefecting, cooperatingUtility=15, cooperati
     TODO
         Verify that this utility function makes sense based on readMe and code
     '''
-    return cooperatingUtility - (cooperatingScalar * math.log(1 + numPlayersDefecting)) + populatiryPoints(numCooperated)
+    return cooperatingUtility - (cooperatingScalar * math.log(1 + numPlayersDefecting)) + populatiryPoints(numPlayersDefecting)
 
-def defectingUtility(numPlayersDefecting, defectingUtility=30, defectingScalar=2):
+def defectingUtility(numPlayersDefecting, defectingUtility=25, defectingScalar=1.5):
     '''
 
     :param numPlayersDefecting: number of players defecting
@@ -125,8 +126,8 @@ def probabiltiy(a, b, choice):
         I had trouble with the weights. When increasing w2 and w3 I got weird results. Try them out and
         see if anything weird happens for you (look at nations choices).
     '''
-    w1 = 5
-    w2 = 1
+    w1 = 10
+    w2 = 3
     w3 = 1
 
     x = (reputations[b] * w1) + (relationships[a][b] * w2) + (-choice * w3) - 1.1
